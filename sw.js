@@ -1,7 +1,7 @@
 // Permet à l'appli de s'ouvrir même sans connexion.
 // Change la version ci-dessous à chaque mise à jour de l'appli.
-const VERSION = "secretaire-v4";
-const FILES = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png"];
+const VERSION = "secretaire-v5";
+const FILES = ["./", "index.html", "manifest.webmanifest", "logo-192.png", "logo-512.png", "logo-maskable-512.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

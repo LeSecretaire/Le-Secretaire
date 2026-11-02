@@ -7,8 +7,8 @@
 <meta name="description" content="Le secrétaire administratif des artisans : documents chiffrés, relances de factures, échéances.">
 <meta name="theme-color" content="#1D44B0">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
+<link rel="apple-touch-icon" href="logo-192.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Secrétaire">
@@ -225,7 +225,11 @@ nav.tabs button.on svg{stroke-width:2.4}
 <body>
 <div class="app" id="app">
   <header class="top" id="top">
-    <div class="brand"><img class="mark" src="icons/icon-192.png" alt="" width="38" height="38"><div><b>Le Secrétaire</b><small id="who">Ton secrétaire perso</small></div></div>
+    <div class="brand"><svg class="mark" width="38" height="38" viewBox="0 0 240 240" aria-hidden="true"><rect width="240" height="240" rx="54" fill="#0E1D45"/><g transform="translate(0 7)"><defs><pattern id="hzTop" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="22" height="22" fill="#F4C20D"/><rect width="9" height="22" fill="#1A1A12"/></pattern></defs>
+<path d="M122.05078125 191.845703125C160.7080078125 191.845703125 183.984375 175.1318359375 183.984375 144.8828125C183.984375 121.708984375 169.9365234375 105.302734375 136.201171875 98.125L123.69140625 95.458984375C109.2333984375 92.3828125 103.18359375 88.1787109375 103.18359375 80.8984375C103.18359375 74.130859375 108.8232421875 69.208984375 121.640625 69.208984375C135.0732421875 69.208984375 141.4306640625 75.0537109375 142.1484375 85.0H181.93359375C181.728515625 55.05859375 158.6572265625 35.166015625 121.640625 35.166015625C85.341796875 35.166015625 59.912109375 54.7509765625 59.912109375 83.76953125C59.912109375 107.6611328125 76.4208984375 121.09375 103.388671875 126.8359375L118.76953125 130.1171875C135.6884765625 133.7060546875 141.73828125 138.0126953125 141.73828125 144.8828125C141.73828125 152.470703125 134.6630859375 157.802734375 121.435546875 157.802734375C105.439453125 157.802734375 96.1083984375 150.3173828125 95.390625 136.26953125H56.015625C56.220703125 174.619140625 82.1630859375 191.845703125 122.05078125 191.845703125Z" fill="url(#hzTop)" stroke="#F4C20D" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="120" cy="108" r="9.5" fill="#0E1D45" stroke="#F4C20D" stroke-width="2"/>
+<path d="M115.5 111.5 L112.5 126 H127.5 L124.5 111.5" fill="#0E1D45" stroke="#F4C20D" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="120" cy="108" r="8.5" fill="#0E1D45"/></g></svg><div><b>Le Secrétaire</b><small id="who">Ton secrétaire perso</small></div></div>
     <button class="lockbtn" id="lockNow" type="button" aria-label="Verrouiller l'application"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Verrouiller</button>
   </header>
   <main id="main" aria-live="polite"></main>
@@ -448,7 +452,11 @@ function showLock(){
   const el = document.createElement("div");
   el.className="lock"; el.id="lock"; el.setAttribute("role","dialog"); el.setAttribute("aria-label","Déverrouiller Le Secrétaire");
   el.innerHTML = `<div class="hz"></div>
-    <img src="icons/icon-192.png" alt="" width="72" height="72" style="border-radius:18px;display:block;box-shadow:0 0 0 3px rgba(255,255,255,.18)">
+    <svg class="mark" width="72" height="72" viewBox="0 0 240 240" aria-hidden="true" style="display:block;border-radius:18px;box-shadow:0 0 0 3px rgba(255,255,255,.18)"><rect width="240" height="240" rx="54" fill="#0E1D45"/><g transform="translate(0 7)"><defs><pattern id="hzLock" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="22" height="22" fill="#F4C20D"/><rect width="9" height="22" fill="#1A1A12"/></pattern></defs>
+<path d="M122.05078125 191.845703125C160.7080078125 191.845703125 183.984375 175.1318359375 183.984375 144.8828125C183.984375 121.708984375 169.9365234375 105.302734375 136.201171875 98.125L123.69140625 95.458984375C109.2333984375 92.3828125 103.18359375 88.1787109375 103.18359375 80.8984375C103.18359375 74.130859375 108.8232421875 69.208984375 121.640625 69.208984375C135.0732421875 69.208984375 141.4306640625 75.0537109375 142.1484375 85.0H181.93359375C181.728515625 55.05859375 158.6572265625 35.166015625 121.640625 35.166015625C85.341796875 35.166015625 59.912109375 54.7509765625 59.912109375 83.76953125C59.912109375 107.6611328125 76.4208984375 121.09375 103.388671875 126.8359375L118.76953125 130.1171875C135.6884765625 133.7060546875 141.73828125 138.0126953125 141.73828125 144.8828125C141.73828125 152.470703125 134.6630859375 157.802734375 121.435546875 157.802734375C105.439453125 157.802734375 96.1083984375 150.3173828125 95.390625 136.26953125H56.015625C56.220703125 174.619140625 82.1630859375 191.845703125 122.05078125 191.845703125Z" fill="url(#hzLock)" stroke="#F4C20D" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="120" cy="108" r="9.5" fill="#0E1D45" stroke="#F4C20D" stroke-width="2"/>
+<path d="M115.5 111.5 L112.5 126 H127.5 L124.5 111.5" fill="#0E1D45" stroke="#F4C20D" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="120" cy="108" r="8.5" fill="#0E1D45"/></g></svg>
     <h1>${first?"Choisis ton code secret":"Entre ton code"}</h1>
     <p>${first?"6 chiffres. Ils servent à chiffrer tes documents sur ce téléphone. Personne d'autre ne les connaît, même pas nous.":"Tes documents sont chiffrés. Ton code est le seul moyen de les ouvrir."}</p>
     <div class="dots" id="dots">${"<span class='dot'></span>".repeat(6)}</div>
