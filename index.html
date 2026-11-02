@@ -26,6 +26,10 @@
   --line:#D8DFEA;
   --plan:#1D44B0;
   --plan-soft:#E3EAFB;
+  --plan-ink:#1D44B0;
+  --on-plan:#FFFFFF;
+  --lock-bg:#1D44B0;
+  --plan-line:transparent;
   --vis:#F4C20D;
   --vis-ink:#1A1A12;
   --late:#B8321C;
@@ -42,14 +46,14 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#0B1322; --surface:#142038; --ink:#E8EEF9; --muted:#9AA9C4; --line:#24334F;
-    --plan:#86A6FF; --plan-soft:#1B2C52; --vis:#F4C20D; --vis-ink:#1A1A12;
+    --plan:#86A6FF; --plan-soft:#1B2C52; --plan-ink:#86A6FF; --on-plan:#0B1322; --lock-bg:#0E1D45; --vis:#F4C20D; --vis-ink:#1A1A12;
     --late:#FF8A73; --late-soft:#3A1E1C; --soon:#F0C063; --soon-soft:#3A2E17; --ok:#6FD7A0; --ok-soft:#163A2B;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#0B1322; --surface:#142038; --ink:#E8EEF9; --muted:#9AA9C4; --line:#24334F;
-  --plan:#86A6FF; --plan-soft:#1B2C52; --vis:#F4C20D; --vis-ink:#1A1A12;
+  --plan:#86A6FF; --plan-soft:#1B2C52; --plan-ink:#86A6FF; --on-plan:#0B1322; --lock-bg:#0E1D45; --vis:#F4C20D; --vis-ink:#1A1A12;
   --late:#FF8A73; --late-soft:#3A1E1C; --soon:#F0C063; --soon-soft:#3A2E17; --ok:#6FD7A0; --ok-soft:#163A2B;
   color-scheme:dark;
 }
@@ -58,14 +62,14 @@ html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
-:focus-visible{outline:3px solid var(--plan);outline-offset:2px;border-radius:6px}
+:focus-visible{outline:3px solid var(--plan-ink);outline-offset:2px;border-radius:6px}
 h1,h2,h3{font-family:var(--font-display);font-stretch:88%;margin:0;text-wrap:balance;letter-spacing:-.01em}
 .num{font-variant-numeric:tabular-nums}
 .app{max-width:480px;height:100%;margin:0 auto;display:flex;flex-direction:column;background:var(--bg);position:relative;overflow:hidden}
 @media (min-width:520px){.app{border-left:1px solid var(--line);border-right:1px solid var(--line)}}
 .top{padding:16px 18px 10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:10px}
-.mark{width:34px;height:34px;border-radius:10px;background:var(--plan);display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:800;font-size:19px;font-stretch:80%}
+.mark{width:38px;height:38px;border-radius:10px;display:block;flex:none}
 .brand b{font-family:var(--font-display);font-weight:800;font-size:20px;font-stretch:85%}
 .brand small{display:block;color:var(--muted);font-size:12.5px;line-height:1.1}
 .lockbtn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;display:flex;align-items:center;gap:6px;font-size:13.5px;color:var(--muted)}
@@ -85,9 +89,7 @@ main{flex:1;overflow-y:auto;padding:4px 16px 24px;-webkit-overflow-scrolling:tou
 .askform{display:flex;gap:8px}
 .askform input{flex:1;min-width:0;border:2px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:12px 12px;font-size:16px;outline:none}
 .askform input:focus{border-color:var(--plan)}
-.askform button{border:0;background:var(--plan);color:#fff;border-radius:var(--r-md);padding:0 16px;font-weight:700;display:flex;align-items:center;gap:6px}
-:root[data-theme="dark"] .askform button,:root[data-theme="dark"] .top .mark{color:#0B1322}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .askform button,:root:not([data-theme="light"]) .top .mark{color:#0B1322}}
+.askform button{border:0;background:var(--plan);color:var(--on-plan);box-shadow:inset 0 0 0 2px var(--plan-line);border-radius:var(--r-md);padding:0 16px;font-weight:700;display:flex;align-items:center;gap:6px}
 .askform .micbtn{background:var(--vis);color:var(--vis-ink)!important;padding:0 13px}
 .askform .micbtn.listening{background:var(--late);color:#fff!important;animation:pulse 1.1s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(184,50,28,.45)}50%{box-shadow:0 0 0 8px rgba(184,50,28,0)}}
@@ -98,9 +100,7 @@ main{flex:1;overflow-y:auto;padding:4px 16px 24px;-webkit-overflow-scrolling:tou
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 12px;font-size:14px;white-space:nowrap}
 .chip:hover{border-color:var(--plan)}
-.chip.on{background:var(--plan);border-color:var(--plan);color:#fff}
-:root[data-theme="dark"] .chip.on{color:#0B1322}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip.on{color:#0B1322}}
+.chip.on{background:var(--plan);border-color:var(--plan-line);color:var(--on-plan)}
 
 .answer{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;animation:rise .22s ease-out}
 @keyframes rise{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -110,21 +110,19 @@ main{flex:1;overflow-y:auto;padding:4px 16px 24px;-webkit-overflow-scrolling:tou
 .money{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px}
 .tile .v{font-family:var(--font-display);font-weight:800;font-size:27px;font-stretch:80%;line-height:1.05;margin-top:4px}
-.tile.win{background:var(--plan);border-color:var(--plan);color:#fff}
-.tile.win .muted{color:rgba(255,255,255,.82)}
-:root[data-theme="dark"] .tile.win{color:#0B1322}:root[data-theme="dark"] .tile.win .muted{color:rgba(11,19,34,.75)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tile.win{color:#0B1322}:root:not([data-theme="light"]) .tile.win .muted{color:rgba(11,19,34,.75)}}
+.tile.win{background:var(--plan);border-color:var(--plan);color:var(--on-plan);box-shadow:inset 0 0 0 2px var(--plan-line)}
+.tile.win .muted{color:var(--on-plan);opacity:.8}
 
 .sec-h{display:flex;align-items:baseline;justify-content:space-between;margin:6px 2px 0}
 .sec-h h3{font-size:18px;font-weight:700}
-.link{background:none;border:0;color:var(--plan);font-weight:700;padding:4px 2px;font-size:14.5px}
+.link{background:none;border:0;color:var(--plan-ink);font-weight:700;padding:4px 2px;font-size:14.5px}
 
 /* Listes */
 .list{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
 .item{display:flex;align-items:center;gap:12px;padding:13px 14px;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;width:100%}
 .item:last-child{border-bottom:0}
 .item:hover{background:var(--bg)}
-.ico{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--plan-soft);color:var(--plan)}
+.ico{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--plan-soft);color:var(--plan-ink)}
 .item .t{font-weight:700;line-height:1.25}
 .item .s{color:var(--muted);font-size:13.5px;line-height:1.3;margin-top:2px}
 .grow{flex:1;min-width:0}
@@ -133,14 +131,12 @@ main{flex:1;overflow-y:auto;padding:4px 16px 24px;-webkit-overflow-scrolling:tou
 .p-late{background:var(--late-soft);color:var(--late)}
 .p-soon{background:var(--soon-soft);color:var(--soon)}
 .p-ok{background:var(--ok-soft);color:var(--ok)}
-.p-info{background:var(--plan-soft);color:var(--plan)}
+.p-info{background:var(--plan-soft);color:var(--plan-ink)}
 .stripe{width:4px;align-self:stretch;border-radius:3px;flex:none}
 .st-late{background:var(--late)}.st-soon{background:var(--soon)}.st-ok{background:var(--ok)}.st-info{background:var(--plan)}
 
 .btn{border:0;border-radius:var(--r-md);padding:12px 14px;font-weight:700;white-space:nowrap;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn-p{background:var(--plan);color:#fff}
-:root[data-theme="dark"] .btn-p{color:#0B1322}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-p{color:#0B1322}}
+.btn-p{background:var(--plan);color:var(--on-plan);box-shadow:inset 0 0 0 2px var(--plan-line)}
 .btn-s{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
 .btn-vis{background:var(--vis);color:var(--vis-ink)}
 .btn-d{background:var(--late-soft);color:var(--late)}
@@ -150,7 +146,7 @@ main{flex:1;overflow-y:auto;padding:4px 16px 24px;-webkit-overflow-scrolling:tou
 /* Navigation */
 nav.tabs{display:grid;grid-template-columns:repeat(5,1fr);background:var(--surface);border-top:1px solid var(--line);padding:6px 4px 8px}
 nav.tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--muted);font-size:11.5px;border-radius:10px}
-nav.tabs button.on{color:var(--plan);font-weight:700}
+nav.tabs button.on{color:var(--plan-ink);font-weight:700}
 nav.tabs button.on svg{stroke-width:2.4}
 
 /* Feuille modale */
@@ -173,9 +169,7 @@ nav.tabs button.on svg{stroke-width:2.4}
 .paper img{width:100%;border-radius:6px;display:block}
 
 /* Écran de verrouillage */
-.lock{position:absolute;inset:0;z-index:40;background:var(--plan);color:#fff;display:flex;flex-direction:column;align-items:center;padding:34px 22px 22px;overflow-y:auto}
-:root[data-theme="dark"] .lock{background:#0E1D45}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lock{background:#0E1D45}}
+.lock{position:absolute;inset:0;z-index:40;background:var(--lock-bg);color:#fff;display:flex;flex-direction:column;align-items:center;padding:34px 22px 22px;overflow-y:auto}
 .lock .hz{position:absolute;left:0;right:0;top:0;height:10px;background:repeating-linear-gradient(-45deg,var(--vis) 0 10px,var(--vis-ink) 10px 20px)}
 .lock h1{font-size:34px;font-weight:800;font-stretch:80%;margin-top:18px;text-align:center}
 .lock p{margin:8px 0 0;text-align:center;max-width:34ch;color:rgba(255,255,255,.86)}
@@ -192,7 +186,7 @@ nav.tabs button.on svg{stroke-width:2.4}
 .lock .fine{font-size:13px;color:rgba(255,255,255,.72);margin-top:18px}
 .lock .busy{margin-top:14px;font-size:14px;color:rgba(255,255,255,.9)}
 
-.toast{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:12px;font-size:14.5px;z-index:60;max-width:90%;text-align:center;animation:rise .2s ease-out}
+.toast{position:absolute;left:50%;top:14px;transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:12px;font-size:14.5px;z-index:60;max-width:90%;text-align:center;animation:rise .2s ease-out}
 .field{display:flex;flex-direction:column;gap:6px;margin-top:12px}
 .field label{font-size:14px;font-weight:700}
 .field input,.field select,.field textarea{border:2px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:11px 12px;font-size:16px;outline:none;width:100%}
@@ -217,9 +211,13 @@ nav.tabs button.on svg{stroke-width:2.4}
 .timeline span{flex:1;font-size:12px;text-align:center;padding:6px 2px;border-radius:8px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
 .timeline span.done{background:var(--ok-soft);color:var(--ok);border-color:transparent;font-weight:700}
 .timeline span.next{background:var(--soon-soft);color:var(--soon);border-color:transparent;font-weight:700}
+.swatches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:8px}
+.swatch{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 2px;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;font-weight:700;color:var(--ink)}
+.swatch i{width:28px;height:28px;border-radius:50%;display:block;border:1px solid rgba(0,0,0,.15)}
+.swatch[aria-pressed="true"]{border-color:var(--plan-ink);box-shadow:0 0 0 2px var(--plan-soft)}
 .empty{text-align:center;padding:22px 10px;color:var(--muted)}
 .aibadge{display:inline-block;font-family:var(--font-display);font-weight:800;font-size:11.5px;font-stretch:90%;background:var(--vis);color:var(--vis-ink);border-radius:6px;padding:1px 6px;vertical-align:2px;margin-right:2px}
-.reading{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px;border-radius:12px;background:var(--plan-soft);color:var(--plan);font-weight:700}
+.reading{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px;border-radius:12px;background:var(--plan-soft);color:var(--plan-ink);font-weight:700}
 .reading i{width:16px;height:16px;border-radius:50%;border:3px solid currentColor;border-right-color:transparent;animation:spin .8s linear infinite;flex:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
@@ -227,7 +225,7 @@ nav.tabs button.on svg{stroke-width:2.4}
 <body>
 <div class="app" id="app">
   <header class="top" id="top">
-    <div class="brand"><div class="mark" aria-hidden="true">S</div><div><b>Le Secrétaire</b><small id="who">Ton secrétaire perso</small></div></div>
+    <div class="brand"><img class="mark" src="icons/icon-192.png" alt="" width="38" height="38"><div><b>Le Secrétaire</b><small id="who">Ton secrétaire perso</small></div></div>
     <button class="lockbtn" id="lockNow" type="button" aria-label="Verrouiller l'application"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Verrouiller</button>
   </header>
   <main id="main" aria-live="polite"></main>
@@ -308,8 +306,8 @@ function demoState(){
     {id:uid(),cat:"entreprise",title:"Avis de situation SIRENE",issuer:"INSEE",date:`${y-2}-02-18`,kw:"kbis siret sirene insee situation immatriculation siren",fields:[["SIRET","912 345 678 00019"],["Code APE","43.22A – Travaux d'installation d'eau et de gaz"],["Date de création","18 février "+(y-2)]]},
     {id:uid(),cat:"entreprise",title:"Certificat RGE Qualibat",issuer:"Qualibat",date:`${y}-04-09`,kw:"rge qualibat qualification certificat",fields:[["Qualification","5211 – Chauffage"],["Valable jusqu'au","8 avril "+(y+3)]]},
     {id:uid(),cat:"vehicule",title:"Carte grise du Kangoo",issuer:"ANTS",date:`${y-3}-06-02`,kw:"carte grise certificat immatriculation kangoo camion utilitaire vehicule voiture",fields:[["Immatriculation","GH-482-KL"],["Mise en circulation","14/05/"+(y-6)]]},
-    {id:uid(),cat:"banque",title:"RIB professionnel",issuer:"Banque (exemple)",date:`${y-2}-02-20`,kw:"rib iban bic banque coordonnees bancaires compte",fields:[["Titulaire","Benali Plomberie"],["IBAN","FR76 3000 •••• •••• 4521"]]},
-    {id:uid(),cat:"clients",title:"Devis D-2026-112 – Rénovation salle de bains",issuer:"Benali Plomberie",date:d(-40),kw:"devis salle bains garnier",fields:[["Client","Mme Garnier"],["Montant TTC","6 480 €"],["Statut","Signé"]]}
+    {id:uid(),cat:"banque",title:"RIB professionnel",issuer:"Banque (exemple)",date:`${y-2}-02-20`,kw:"rib iban bic banque coordonnees bancaires compte",fields:[["Titulaire","Dupont Plomberie"],["IBAN","FR76 3000 •••• •••• 4521"]]},
+    {id:uid(),cat:"clients",title:"Devis D-2026-112 – Rénovation salle de bains",issuer:"Dupont Plomberie",date:d(-40),kw:"devis salle bains garnier",fields:[["Client","Mme Garnier"],["Montant TTC","6 480 €"],["Statut","Signé"]]}
   ];
   const inv = [
     {id:uid(),num:"F-2026-041",client:"Mme Garnier",ctype:"particulier",email:"garnier@exemple.fr",amount:2160,issued:d(-48),due:d(-18),status:"due",auto:true,sent:[d(-17),d(-10)]},
@@ -320,10 +318,10 @@ function demoState(){
     {id:uid(),num:"F-2026-029",client:"Restaurant Le Comptoir",ctype:"pro",email:"compta@comptoir.exemple",amount:812,issued:d(-150),due:d(-120),status:"paid",paidOn:d(-108),byGaston:true,auto:true,sent:[d(-119)]},
     {id:uid(),num:"F-2026-046",client:"M. Lefèvre",ctype:"particulier",email:"lefevre@exemple.fr",amount:540,issued:d(-35),due:d(-5),status:"paid",paidOn:d(-4),byGaston:false,auto:false,sent:[]}
   ];
-  return {v:1, profile:{name:"Karim",fullname:"Karim Benali",company:"Benali Plomberie",job:"Plombier-chauffagiste",phone:"06 12 34 56 78"}, docs, inv, deadlines:buildDeadlines(true), reminders:true, demo:true};
+  return {v:1, profile:{name:"Bernard",fullname:"Bernard Dupont",company:"Dupont Plomberie",job:"Plombier-chauffagiste",phone:"06 12 34 56 78"}, docs, inv, deadlines:buildDeadlines(true), reminders:true, demo:true};
 }
-function emptyState(){
-  return {v:1, profile:{name:"",fullname:"",company:"",job:"Artisan du bâtiment",phone:""}, docs:[], inv:[], deadlines:buildDeadlines(false), reminders:true};
+function emptyState(official){
+  return {v:1, profile:{name:"",fullname:"",company:"",job:"Artisan du bâtiment",phone:""}, docs:[], inv:[], deadlines:official?buildDeadlines(false):[], reminders:true};
 }
 
 function buildDeadlines(demo){
@@ -332,10 +330,10 @@ function buildDeadlines(demo){
   // Déclarations trimestrielles micro-entrepreneur : fin janvier, avril, juillet, octobre
   const q = [[0,31],[3,30],[6,31],[9,31]].map(([m,dd])=>next(m,dd)).sort()[0];
   const list = [
-    {id:uid(),title:"Déclaration URSSAF du trimestre",what:"Déclarer ton chiffre d'affaires et payer les cotisations (micro-entreprise, déclaration trimestrielle)",date:q,cat:"urssaf"},
-    {id:uid(),title:"Paiement de la CFE",what:demo?"412 € à payer sur impots.gouv.fr (avis reçu)":"À payer sur impots.gouv.fr, ton avis est dans ton espace professionnel",date:next(11,15),cat:"impots"},
-    {id:uid(),title:"Déclaration de revenus",what:"Date estimée, le calendrier officiel sort au printemps",date:iso(new Date(y+1,4,20)),cat:"impots",estimated:true},
-    {id:uid(),title:"Factures électroniques obligatoires",what:"À partir de cette date, tes factures aux pros doivent passer par une plateforme agréée",date:"2027-09-01",cat:"entreprise"}
+    {id:uid(),official:true,title:"Déclaration URSSAF du trimestre",what:"Déclarer ton chiffre d'affaires et payer les cotisations (micro-entreprise, déclaration trimestrielle)",info:"Tu déclares sur autoentrepreneur.urssaf.fr le chiffre d'affaires encaissé pendant le trimestre, et tu paies tes cotisations en même temps. Si tu as choisi la déclaration mensuelle, c'est chaque mois. Même sans chiffre d'affaires, il faut déclarer 0 €.",date:q,cat:"urssaf"},
+    {id:uid(),official:true,info:"La CFE (cotisation foncière des entreprises) est une taxe locale que paient les entreprises, un peu comme une taxe d'habitation pour les pros. Tu n'en paies pas l'année où tu crées ton entreprise. L'avis se trouve dans ton espace professionnel sur impots.gouv.fr.",title:"Paiement de la CFE",what:demo?"412 € à payer sur impots.gouv.fr (avis reçu)":"À payer sur impots.gouv.fr, ton avis est dans ton espace professionnel",date:next(11,15),cat:"impots"},
+    {id:uid(),official:true,info:"Ta déclaration d'impôts annuelle sur impots.gouv.fr. En micro-entreprise, tu y reportes aussi ton chiffre d'affaires de l'année.",title:"Déclaration de revenus",what:"Date estimée, le calendrier officiel sort au printemps",date:iso(new Date(y+1,4,20)),cat:"impots",estimated:true},
+    {id:uid(),official:true,info:"À partir du 1er septembre 2027, les micro-entreprises devront envoyer leurs factures aux clients professionnels via une plateforme agréée. Depuis septembre 2026, il faut déjà pouvoir en recevoir.",title:"Factures électroniques obligatoires",what:"À partir de cette date, tes factures aux pros doivent passer par une plateforme agréée",date:"2027-09-01",cat:"entreprise"}
   ];
   if(demo){
     list.push({id:uid(),title:"Contrôle technique du Kangoo",what:"Prendre rendez-vous dans un centre agréé",date:iso(addDays(t,24)),cat:"vehicule"});
@@ -343,6 +341,36 @@ function buildDeadlines(demo){
   }
   return list.filter(x=>x.date>=iso(t));
 }
+
+/* ---------- Apparence (thème et couleur principale) ---------- */
+const PREFS_KEY="secretaire.prefs";
+const ACCENTS = {
+  bleu:      {label:"Bleu",      swatch:"#1D44B0", light:{plan:"#1D44B0",ink:"#1D44B0",soft:"#E3EAFB",on:"#FFFFFF",lock:"#1D44B0"}, dark:{plan:"#86A6FF",ink:"#86A6FF",soft:"#1B2C52",on:"#0B1322",lock:"#0E1D45"}},
+  jaune:     {label:"Jaune",     swatch:"#F4C20D", light:{plan:"#F4C20D",ink:"#7A5C00",soft:"#FBF0C8",on:"#1A1A12",lock:"#1A1A12"}, dark:{plan:"#F4C20D",ink:"#F4C20D",soft:"#3A3214",on:"#1A1A12",lock:"#1A1A12"}},
+  orange:    {label:"Orange",    swatch:"#E8590C", light:{plan:"#C8440A",ink:"#B03D09",soft:"#FDE7D9",on:"#FFFFFF",lock:"#B03D09"}, dark:{plan:"#FF9A52",ink:"#FFA866",soft:"#3D2414",on:"#1E0E04",lock:"#3A1A08"}},
+  rouge:     {label:"Rouge",     swatch:"#C62828", light:{plan:"#C62828",ink:"#B3261E",soft:"#FBE3E1",on:"#FFFFFF",lock:"#B3261E"}, dark:{plan:"#FF7A6E",ink:"#FF8A80",soft:"#3E1C1A",on:"#1A0B0A",lock:"#5A1712"}},
+  rose:      {label:"Rose",      swatch:"#D6336C", light:{plan:"#C2255C",ink:"#AD2052",soft:"#FBE3EC",on:"#FFFFFF",lock:"#A8265A"}, dark:{plan:"#FF8AB4",ink:"#FF9CC0",soft:"#3D1A29",on:"#200814",lock:"#3A1224"}},
+  violet:    {label:"Violet",    swatch:"#6B3FD1", light:{plan:"#6B3FD1",ink:"#5E35C0",soft:"#ECE5FB",on:"#FFFFFF",lock:"#4F2DA6"}, dark:{plan:"#B49BFF",ink:"#BFA9FF",soft:"#2A2150",on:"#120A2A",lock:"#1E1540"}},
+  turquoise: {label:"Turquoise", swatch:"#0E9A95", light:{plan:"#0B7A76",ink:"#0A6C68",soft:"#D9F2F1",on:"#FFFFFF",lock:"#0B6663"}, dark:{plan:"#4FD1CB",ink:"#62D9D3",soft:"#12393A",on:"#04191A",lock:"#0A2A2A"}},
+  vert:      {label:"Vert",      swatch:"#1E7A46", light:{plan:"#1E7A46",ink:"#1B6E40",soft:"#DDF2E6",on:"#FFFFFF",lock:"#1E5F3A"}, dark:{plan:"#5DD39E",ink:"#6FDCAA",soft:"#15392A",on:"#06140D",lock:"#0F2A1E"}},
+  noir:      {label:"Noir",      swatch:"#1A1D24", light:{plan:"#1A1D24",ink:"#1A1D24",soft:"#E6E8EC",on:"#FFFFFF",lock:"#14171D"}, dark:{plan:"#E8EEF9",ink:"#E8EEF9",soft:"#26344F",on:"#0B1322",lock:"#05080F"}},
+  blanc:     {label:"Blanc",     swatch:"#FFFFFF", light:{plan:"#FFFFFF",ink:"#142033",soft:"#E9ECF2",on:"#142033",lock:"#142033",line:"#142033"}, dark:{plan:"#FFFFFF",ink:"#FFFFFF",soft:"#26344F",on:"#0B1322",lock:"#05080F"}}
+};
+let PREFS = {theme:"auto", accent:"bleu"};
+try{ const raw=localStorage.getItem(PREFS_KEY); if(raw){ const v=JSON.parse(raw); if(["auto","light","dark"].includes(v.theme)) PREFS.theme=v.theme; if(ACCENTS[v.accent]) PREFS.accent=v.accent; } }catch(e){}
+const darkMQ = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+function isDark(){ return PREFS.theme==="dark" || (PREFS.theme==="auto" && !!(darkMQ && darkMQ.matches)); }
+function applyPrefs(){
+  const root=document.documentElement;
+  if(PREFS.theme==="auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme",PREFS.theme);
+  const pal = ACCENTS[PREFS.accent][isDark()?"dark":"light"];
+  root.style.setProperty("--plan",pal.plan); root.style.setProperty("--plan-ink",pal.ink);
+  root.style.setProperty("--plan-soft",pal.soft); root.style.setProperty("--on-plan",pal.on); root.style.setProperty("--lock-bg",pal.lock); root.style.setProperty("--plan-line",pal.line||"transparent");
+  const m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute("content", isDark()? "#0B1322" : pal.lock);
+}
+function savePrefs(){ try{ localStorage.setItem(PREFS_KEY, JSON.stringify(PREFS)); }catch(e){} applyPrefs(); }
+if(darkMQ){ const h=()=>{ if(PREFS.theme==="auto") applyPrefs(); }; darkMQ.addEventListener ? darkMQ.addEventListener("change",h) : darkMQ.addListener(h); }
+applyPrefs();
 
 /* ---------- Coffre chiffré (AES-256-GCM, clé dérivée du code) ---------- */
 const STORE = "gaston.vault.v1";
@@ -389,12 +417,12 @@ async function persist(){
   lastCipher = b64(ct);
   await store.set(JSON.stringify({v:1,salt:b64(SALT),iv:b64(iv),ct:lastCipher}));
 }
-async function openVault(code, useDemo){
+async function openVault(code, useDemo, useOfficial){
   const raw = store.get();
   if(!raw){
     SALT = crypto.getRandomValues(new Uint8Array(16));
     KEY = await deriveKey(code, SALT);
-    S = useDemo ? demoState() : emptyState();
+    S = useDemo ? demoState() : emptyState(useOfficial);
     await persist();
     return true;
   }
@@ -404,7 +432,7 @@ async function openVault(code, useDemo){
   try{
     const pt = await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(box.iv)}, k, unb64(box.ct));
     KEY = k; S = JSON.parse(new TextDecoder().decode(pt)); lastCipher = box.ct;
-    if(!Array.isArray(S.deadlines) || !S.deadlines.length) S.deadlines = buildDeadlines(false);
+    if(!Array.isArray(S.deadlines)) S.deadlines = [];
     return true;
   }catch(e){ return false; }
 }
@@ -420,7 +448,7 @@ function showLock(){
   const el = document.createElement("div");
   el.className="lock"; el.id="lock"; el.setAttribute("role","dialog"); el.setAttribute("aria-label","Déverrouiller Le Secrétaire");
   el.innerHTML = `<div class="hz"></div>
-    <div class="mark" style="width:54px;height:54px;font-size:30px;background:var(--vis);color:var(--vis-ink);border-radius:16px">S</div>
+    <img src="icons/icon-192.png" alt="" width="72" height="72" style="border-radius:18px;display:block;box-shadow:0 0 0 3px rgba(255,255,255,.18)">
     <h1>${first?"Choisis ton code secret":"Entre ton code"}</h1>
     <p>${first?"6 chiffres. Ils servent à chiffrer tes documents sur ce téléphone. Personne d'autre ne les connaît, même pas nous.":"Tes documents sont chiffrés. Ton code est le seul moyen de les ouvrir."}</p>
     <div class="dots" id="dots">${"<span class='dot'></span>".repeat(6)}</div>
@@ -431,7 +459,7 @@ function showLock(){
       <button type="button" data-k="0" aria-label="0">0</button>
       <button type="button" class="ghost" data-k="del" aria-label="Effacer le dernier chiffre">Effacer</button>
     </div>
-    ${first?`<label class="demochk"><input type="checkbox" id="demo" checked> Charger un exemple (artisan fictif) pour tester</label>`:`<div class="fine">Verrouillage automatique après 3 minutes sans activité.</div>`}`;
+    ${first?`<label class="demochk"><input type="checkbox" id="demo" checked> Charger un exemple (artisan fictif) pour tester</label><label class="demochk" style="margin-top:10px"><input type="checkbox" id="official"> Ajouter les rappels des micro-entrepreneurs (URSSAF, CFE, impôts)</label>`:`<div class="fine">Verrouillage automatique après 3 minutes sans activité.</div>`}`;
   $("#app").appendChild(el);
   el.addEventListener("click", e=>{ const b=e.target.closest("button"); if(b) press(b.dataset.k); });
   setTimeout(()=>{ const b=el.querySelector('[data-k="1"]'); b && b.focus(); },50);
@@ -457,7 +485,8 @@ async function press(k){
   if(pin.length===6){
     busy=true; msg.textContent="Ouverture du coffre…";
     const useDemo = !!($("#demo") && $("#demo").checked);
-    const ok = await openVault(pin, useDemo).catch(()=>false);
+    const useOfficial = !!($("#official") && $("#official").checked);
+    const ok = await openVault(pin, useDemo, useOfficial).catch(()=>false);
     busy=false;
     if(ok){ $("#lock").remove(); boot(); }
     else { msg.textContent="Code incorrect. Réessaie."; const d=$("#dots"); d.classList.remove("shake"); void d.offsetWidth; d.classList.add("shake"); pin=""; drawDots(); }
@@ -471,7 +500,7 @@ let lastAct = Date.now();
 setInterval(()=>{ if(KEY && Date.now()-lastAct>180000) lock(); }, 10000);
 
 /* ---------- Navigation ---------- */
-const TABS=[["home","Accueil","home"],["docs","Documents","docs"],["bills","Factures","bills"],["cal","Échéances","cal"],["sec","Sécurité","shield"]];
+const TABS=[["home","Accueil","home"],["docs","Documents","docs"],["bills","Factures","bills"],["cal","Échéances","cal"],["sec","Réglages","shield"]];
 let tab="home", docFilter="all", billFilter="due", lastAnswer=null;
 function drawTabs(){
   $("#tabs").innerHTML = TABS.map(([id,l,i])=>`<button type="button" data-tab="${id}" class="${tab===id?"on":""}" ${tab===id?'aria-current="page"':""}>${ico(i,22)}<span>${l}</span></button>`).join("");
@@ -600,7 +629,8 @@ function billList(list){
   return `<div class="list">${list.map(i=>{ const st=invState(i); return `<button type="button" class="item" data-inv="${i.id}"><span class="stripe st-${st.cls}"></span><span class="grow"><span class="t" style="display:block">${esc(i.client)}</span><span class="s" style="display:block">${esc(i.num)} · ${st.pill}</span></span><span class="amt num">${eur(i.amount)}</span></button>`; }).join("")}</div>`;
 }
 function dlList(list){
-  return `<div class="list">${list.map(x=>{ const c=catOf(x.cat); return `<div class="item"><span class="ico">${ico(c.icon)}</span><span class="grow"><span class="t" style="display:block">${esc(x.title)}</span><span class="s" style="display:block">${esc(x.what)}</span><span class="s" style="display:block;margin-top:5px">${fmtDate(x.date)} ${dlPill(x.date)}${x.estimated?' <span class="pill p-info">Estimée</span>':""}</span></span></div>`; }).join("")}</div>`;
+  if(!list.length) return `<div class="list"><div class="empty">Aucune échéance pour l'instant.</div></div>`;
+  return `<div class="list">${list.map(x=>{ const c=catOf(x.cat); return `<button type="button" class="item" data-dl="${x.id}"><span class="ico">${ico(c.icon)}</span><span class="grow"><span class="t" style="display:block">${esc(x.title)}</span><span class="s" style="display:block">${esc(x.what)}</span><span class="s" style="display:block;margin-top:5px">${fmtDate(x.date)} ${dlPill(x.date)}${x.estimated?' <span class="pill p-info">Estimée</span>':""}</span></span></button>`; }).join("")}</div>`;
 }
 function askBlock(){
   return `<section class="ask" aria-label="Demander au Secrétaire">
@@ -660,18 +690,30 @@ function render(){
   else if(tab==="cal"){
     const list = upcoming();
     let html="", cur="";
-    list.forEach(x=>{ const mo=parseISO(x.date).toLocaleDateString("fr-FR",{month:"long",year:"numeric"}); if(mo!==cur){ if(cur) html+="</div>"; html+=`<div class="month">${mo}</div><div class="list">`; cur=mo; } const c=catOf(x.cat); const n=daysFrom(x.date); html+=`<div class="item"><span class="stripe st-${n<=30?"soon":"info"}"></span><span class="grow"><span class="t" style="display:block">${esc(x.title)}</span><span class="s" style="display:block">${esc(x.what)}</span><span class="s" style="display:block;margin-top:5px">${fmtDate(x.date)} ${dlPill(x.date)}${x.estimated?' <span class="pill p-info">Estimée</span>':""}</span></span><span class="ico">${ico(c.icon,20)}</span></div>`; });
+    list.forEach(x=>{ const mo=parseISO(x.date).toLocaleDateString("fr-FR",{month:"long",year:"numeric"}); if(mo!==cur){ if(cur) html+="</div>"; html+=`<div class="month">${mo}</div><div class="list">`; cur=mo; } const c=catOf(x.cat); const n=daysFrom(x.date); html+=`<button type="button" class="item" data-dl="${x.id}"><span class="stripe st-${n<=30?"soon":"info"}"></span><span class="grow"><span class="t" style="display:block">${esc(x.title)}</span><span class="s" style="display:block">${esc(x.what)}</span><span class="s" style="display:block;margin-top:5px">${fmtDate(x.date)} ${dlPill(x.date)}${x.estimated?' <span class="pill p-info">Estimée</span>':""}</span></span><span class="ico">${ico(c.icon,20)}</span></button>`; });
     if(cur) html+="</div>";
     m.innerHTML = `<div class="stack">
       <div class="sec-h"><h3 style="font-size:24px;font-weight:800">Mes échéances</h3></div>
       <div class="card row between"><div class="grow"><b>Rappels automatiques</b><div class="small muted">Je te préviens 15 jours, 3 jours et la veille.</div></div><button type="button" class="switch" role="switch" aria-checked="${S.reminders}" aria-label="Rappels automatiques" data-act="toggleRem"></button></div>
-      ${html}
+      ${html || `<div class="list"><div class="empty">Aucune échéance. Ajoute les tiennes, je te préviendrai à temps.</div></div>`}
       <button type="button" class="btn btn-s" data-act="newdl">${ico("plus",18)}Ajouter une échéance</button>
+      ${S.deadlines.some(x=>x.official)?"":`<button type="button" class="btn btn-s" data-act="official">Ajouter les rappels des micro-entrepreneurs</button>`}
+      <p class="small muted" style="margin:0">Touche une échéance pour la marquer comme faite ou la supprimer.</p>
     </div>`;
   }
   else if(tab==="sec"){
     m.innerHTML = `<div class="stack">
-      <div class="sec-h"><h3 style="font-size:24px;font-weight:800">Ta sécurité</h3></div>
+      <div class="sec-h"><h3 style="font-size:24px;font-weight:800">Réglages</h3></div>
+      <div class="card"><b>Apparence</b>
+        <div class="field" style="margin-top:10px"><label>Fond</label>
+          <div class="seg" role="group" aria-label="Fond de l'application">${[["auto","Automatique"],["light","Clair"],["dark","Sombre"]].map(([k,l])=>`<button type="button" class="${PREFS.theme===k?"on":""}" aria-pressed="${PREFS.theme===k}" data-theme-set="${k}">${l}</button>`).join("")}</div>
+        </div>
+        <div class="field"><label>Couleur principale</label>
+          <div class="swatches" role="group" aria-label="Couleur principale">${Object.entries(ACCENTS).map(([k,a])=>`<button type="button" class="swatch" aria-pressed="${PREFS.accent===k}" data-accent-set="${k}"><i style="background:${a.swatch}"></i>${a.label}</button>`).join("")}</div>
+        </div>
+        <p class="small muted" style="margin:10px 0 0">« Automatique » suit le réglage de ton téléphone.</p>
+      </div>
+      <div class="sec-h"><h3>Sécurité</h3></div>
       <div class="card">
         <div class="check">${ico("check",20)}<div><b>Chiffré sur ton téléphone</b><div class="small muted">Chaque document est verrouillé en AES-256 avant d'être enregistré. La clé est fabriquée à partir de ton code.</div></div></div>
         <div class="check">${ico("check",20)}<div><b>Ton code ne quitte jamais ton téléphone</b><div class="small muted">Il n'est ni envoyé ni stocké. Sans lui, le coffre est illisible.</div></div></div>
@@ -703,9 +745,21 @@ function docSheet(id){
   const d=S.docs.find(x=>x.id===id); if(!d) return;
   openSheet(`<h2>${esc(d.title)}</h2><div class="small muted">${esc(catOf(d.cat).label)} · ajouté le ${fmtDate(d.date)}</div>${paper(d,false)}
     <div class="btns"><button type="button" class="btn btn-p" data-copydoc="${d.id}">${ico("copy",18)}Copier les infos</button><button type="button" class="btn btn-s" data-act="close">Fermer</button></div>
-    ${d.mine?`<button type="button" class="btn btn-d" style="width:100%;margin-top:10px" data-deldoc="${d.id}">Supprimer ce document</button>`:""}`, d.title);
+    <button type="button" class="btn btn-d" style="width:100%;margin-top:10px" data-deldoc="${d.id}">Supprimer ce document</button>`, d.title);
 }
 
+function confirmSheet(title, text, okLabel, onOk){
+  openSheet(`<h2>${esc(title)}</h2><p class="muted">${esc(text)}</p><div class="btns"><button type="button" class="btn btn-d" id="cfok">${esc(okLabel)}</button><button type="button" class="btn btn-s" data-act="close">Annuler</button></div>`, title);
+  $("#cfok").onclick = onOk;
+}
+function dlSheet(id){
+  const x=S.deadlines.find(d=>d.id===id); if(!x) return;
+  openSheet(`<h2>${esc(x.title)}</h2>
+    <div class="row" style="margin:6px 0 12px;flex-wrap:wrap">${dlPill(x.date)}${x.estimated?'<span class="pill p-info">Estimée</span>':""}<span class="small muted">${fmtDate(x.date)} · ${esc(catOf(x.cat).label)}</span></div>
+    <div class="card"><p style="margin:0">${esc(x.what)}</p>${x.info?`<p class="small muted" style="margin:10px 0 0">${esc(x.info)}</p>`:""}</div>
+    <div class="btns" style="margin-top:14px"><button type="button" class="btn btn-vis" data-donedl="${x.id}">${ico("check",18)}C'est fait</button><button type="button" class="btn btn-d" data-deldl="${x.id}">Supprimer</button></div>
+    <button type="button" class="btn btn-s" style="width:100%;margin-top:10px" data-act="close">Fermer</button>`, x.title);
+}
 function relanceLevel(i){ const n=-daysFrom(i.due); if(n>=30) return 3; if(n>=8) return 2; return 1; }
 function relanceText(i,lvl){
   const p=S.profile, sig=[p.fullname||p.name, p.company, p.phone].filter(Boolean).join("\n");
@@ -723,7 +777,7 @@ function invSheet(id, lvlForce){
       <div class="card"><div class="row between"><span class="muted">Montant</span><span class="amt num">${eur2(i.amount)}</span></div>
       <div class="row between" style="margin-top:8px"><span class="muted">Relances envoyées</span><b>${i.sent.length}</b></div>
       ${i.byGaston?`<p class="small" style="margin:10px 0 0;color:var(--ok);font-weight:700">Encaissée grâce aux relances du Secrétaire</p>`:""}</div>
-      <div class="btns" style="margin-top:14px"><button type="button" class="btn btn-s" data-act="close">Fermer</button></div>`, i.client);
+      <div class="btns" style="margin-top:14px"><button type="button" class="btn btn-d" data-delinv="${i.id}">Supprimer</button><button type="button" class="btn btn-s" data-act="close">Fermer</button></div>`, i.client);
     return;
   }
   const lvl = lvlForce || relanceLevel(i);
@@ -745,7 +799,8 @@ function invSheet(id, lvlForce){
       <button type="button" class="btn btn-s" data-copymsg="1">${ico("copy",18)}Copier</button>
     </div>
     <p class="small muted" style="margin:8px 0 0">Ta messagerie s'ouvre avec le message prêt. Tu n'as plus qu'à appuyer sur Envoyer.</p>
-    <button type="button" class="btn btn-vis" style="width:100%;margin-top:10px" data-paid="${i.id}">${ico("check",18)}Le client a payé</button>`, i.client);
+    <button type="button" class="btn btn-vis" style="width:100%;margin-top:10px" data-paid="${i.id}">${ico("check",18)}Le client a payé</button>
+    <button type="button" class="btn btn-d" style="width:100%;margin-top:10px" data-delinv="${i.id}">Supprimer cette facture</button>`, i.client);
 }
 
 function addDocSheet(){
@@ -820,9 +875,9 @@ function newInvSheet(){
 function profileSheet(first){
   const p=S.profile;
   openSheet(`<h2>${first?"Bienvenue !":"Mon profil"}</h2><p class="small muted" style="margin:0">${first?"Dis-moi qui tu es : je m'en sers pour signer tes relances.":"Ces infos signent tes relances."}</p>
-    <div class="field"><label for="pname">Prénom</label><input id="pname" value="${esc(p.name)}" placeholder="Ex. : Karim" autocomplete="given-name"></div>
-    <div class="field"><label for="pfull">Nom complet</label><input id="pfull" value="${esc(p.fullname)}" placeholder="Ex. : Karim Benali" autocomplete="name"></div>
-    <div class="field"><label for="pcomp">Entreprise</label><input id="pcomp" value="${esc(p.company)}" placeholder="Ex. : Benali Plomberie" autocomplete="organization"></div>
+    <div class="field"><label for="pname">Prénom</label><input id="pname" value="${esc(p.name)}" placeholder="Ex. : Bernard" autocomplete="given-name"></div>
+    <div class="field"><label for="pfull">Nom complet</label><input id="pfull" value="${esc(p.fullname)}" placeholder="Ex. : Bernard Dupont" autocomplete="name"></div>
+    <div class="field"><label for="pcomp">Entreprise</label><input id="pcomp" value="${esc(p.company)}" placeholder="Ex. : Dupont Plomberie" autocomplete="organization"></div>
     <div class="field"><label for="pjob">Métier</label><input id="pjob" value="${esc(p.job)}" placeholder="Ex. : Plombier-chauffagiste"></div>
     <div class="field"><label for="pphone">Téléphone</label><input id="pphone" type="tel" value="${esc(p.phone)}" placeholder="06 12 34 56 78" autocomplete="tel"></div>
     <div id="perr" class="small" style="color:var(--late);font-weight:700;margin-top:8px" role="alert"></div>
@@ -923,7 +978,13 @@ $("#app").addEventListener("click", async e=>{
     closeSheet(); toast("Tes SMS s'ouvrent avec le message prêt."); render(); return;
   }
   if(ds.paid){ const i=S.inv.find(x=>x.id===ds.paid); i.status="paid"; i.paidOn=iso(today()); i.byGaston=i.sent.length>0; await persist(); closeSheet(); toast(i.byGaston?`+${eur(i.amount)} récupérés grâce aux relances`:"Facture marquée comme payée"); render(); return; }
-  if(ds.deldoc){ S.docs=S.docs.filter(x=>x.id!==ds.deldoc); await persist(); closeSheet(); toast("Document supprimé"); render(); return; }
+  if(ds.themeSet){ PREFS.theme=ds.themeSet; savePrefs(); render(); return; }
+  if(ds.accentSet){ PREFS.accent=ds.accentSet; savePrefs(); render(); return; }
+  if(ds.dl){ dlSheet(ds.dl); return; }
+  if(ds.deldoc){ const id=ds.deldoc; confirmSheet("Supprimer ce document ?","Il sera effacé de ton coffre. C'est définitif.","Supprimer", async ()=>{ S.docs=S.docs.filter(x=>x.id!==id); await persist(); closeSheet(); toast("Document supprimé"); if(lastAnswer&&lastAnswer.kind==="docs"){ lastAnswer=null; } render(); }); return; }
+  if(ds.delinv){ const id=ds.delinv; confirmSheet("Supprimer cette facture ?","Elle ne sera plus suivie et les relances s'arrêtent. C'est définitif.","Supprimer", async ()=>{ S.inv=S.inv.filter(x=>x.id!==id); await persist(); closeSheet(); toast("Facture supprimée"); render(); }); return; }
+  if(ds.deldl){ const id=ds.deldl; confirmSheet("Supprimer cette échéance ?","Tu ne recevras plus de rappel pour elle.","Supprimer", async ()=>{ S.deadlines=S.deadlines.filter(x=>x.id!==id); await persist(); closeSheet(); toast("Échéance supprimée"); render(); }); return; }
+  if(ds.donedl){ S.deadlines=S.deadlines.filter(x=>x.id!==ds.donedl); await persist(); closeSheet(); toast("Bien joué, une chose de moins à faire"); render(); return; }
   switch(ds.act){
     case "mic": listen(t); break;
     case "profile": profileSheet(false); break;
@@ -931,6 +992,7 @@ $("#app").addEventListener("click", async e=>{
     case "add": addDocSheet(); break;
     case "newinv": newInvSheet(); break;
     case "newdl": newDlSheet(); break;
+    case "official": { const have=new Set(S.deadlines.map(x=>x.title)); buildDeadlines(false).forEach(x=>{ if(!have.has(x.title)) S.deadlines.push(x); }); await persist(); render(); toast("Rappels des micro-entrepreneurs ajoutés"); break; }
     case "close": closeSheet(); break;
     case "lock": lock(); break;
     case "toggleRem": S.reminders=!S.reminders; await persist(); render(); toast(S.reminders?"Rappels activés":"Rappels coupés"); break;
